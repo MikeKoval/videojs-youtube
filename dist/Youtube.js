@@ -289,6 +289,18 @@ THE SOFTWARE. */
 
       this.lastState = state;
 
+      if (e.data == YT.PlayerState.ENDED) {
+        this.el_.parentNode.classList.add("ended");
+      } else if (e.data == YT.PlayerState.PAUSED) {
+        this.el_.parentNode.classList.add("paused");
+      } else if (e.data == YT.PlayerState.PLAYING) {
+        this.el_.parentNode.classList.remove("ended");
+        this.el_.parentNode.classList.remove("paused");
+        this.el_.parentNode.classList.remove("buffering");
+      } else if (e.data == YT.PlayerState.BUFFERING) {
+        this.el_.parentNode.classList.add("buffering");
+      }
+
       switch (state) {
         case -1:
           this.trigger('loadstart');
@@ -661,9 +673,9 @@ THE SOFTWARE. */
 
     supportsFullScreen: function() {
       return document.fullscreenEnabled ||
-             document.webkitFullscreenEnabled ||
-             document.mozFullScreenEnabled ||
-             document.msFullscreenEnabled;
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled;
     },
 
     // Tries to get the highest resolution thumbnail available for the video
@@ -758,10 +770,10 @@ THE SOFTWARE. */
 
   function injectCss() {
     var css = // iframe blocker to catch mouse events
-              '.vjs-youtube .vjs-iframe-blocker { display: none; }' +
-              '.vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
-              '.vjs-youtube .vjs-poster { background-size: cover; }' +
-              '.vjs-youtube-mobile .vjs-big-play-button { display: none; }';
+      '.vjs-youtube .vjs-iframe-blocker { display: none; }' +
+      '.vjs-youtube.vjs-user-inactive .vjs-iframe-blocker { display: block; }' +
+      '.vjs-youtube .vjs-poster { background-size: cover; }' +
+      '.vjs-youtube-mobile .vjs-big-play-button { display: none; }';
 
     var head = document.head || document.getElementsByTagName('head')[0];
 
