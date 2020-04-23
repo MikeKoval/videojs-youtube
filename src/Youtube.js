@@ -293,6 +293,7 @@ THE SOFTWARE. */
         this.el_.parentNode.classList.add("ended");
       } else if (e.data == YT.PlayerState.PAUSED) {
         this.el_.parentNode.classList.add("paused");
+        this.el_.parentNode.classList.remove("buffering");
       } else if (e.data == YT.PlayerState.PLAYING) {
         this.el_.parentNode.classList.remove("ended");
         this.el_.parentNode.classList.remove("paused");
